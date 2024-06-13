@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useBlogPosts from "./Hook";
 import axios from "axios";
 
 function HomePage() {
   const navigate = useNavigate();
-
-  const [posts, setPosts] = useState([]);
-  const [isError, setIsError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const {posts, isError ,isLoading} = useBlogPosts();
 
   const getPosts = async () => {
     try {
