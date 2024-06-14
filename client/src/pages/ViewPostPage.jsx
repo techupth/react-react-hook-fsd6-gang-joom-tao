@@ -1,29 +1,32 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useBlogPosts from "../utility/useBlogPosts";
 
 function ViewPostPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const [posts, setPosts] = useState([]);
-  const [isError, setIsError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const { posts, isError, isLoading } = useBlogPosts();
 
-  const getPosts = async () => {
-    try {
-      setIsError(false);
-      setIsLoading(true);
-      const results = await axios("http://localhost:4000/posts");
-      setPosts(results.data.data);
-      setIsLoading(false);
-    } catch (error) {
-      setIsError(true);
-    }
-  };
+  // const [posts, setPosts] = useState([]);
+  // const [isError, setIsError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(null);
 
-  useEffect(() => {
-    getPosts();
-  }, []);
+  // const getPosts = async () => {
+  //   try {
+  //     setIsError(false);
+  //     setIsLoading(true);
+  //     const results = await axios("http://localhost:4000/posts");
+  //     setPosts(results.data.data);
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     setIsError(true);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getPosts();
+  // }, []);
 
   return (
     <div>
@@ -50,7 +53,9 @@ function ViewPostPage() {
         {isLoading ? <h1>Loading ....</h1> : null}
       </div>
 
-      <button onClick={() => navigate("/")}>Back to Home</button>
+      <Link to="/">
+        <button>Back to Home</button>
+      </Link>
     </div>
   );
 }
